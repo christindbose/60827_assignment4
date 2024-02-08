@@ -204,5 +204,6 @@
 	extern int runGpuGemm (int argc, char ** argv);
 
 	extern int evaluateGpuGemm ();
-
+        
+	extern int runAlexnet (int argc, char ** argv);
 #endif

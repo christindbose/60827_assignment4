@@ -147,4 +147,16 @@ int evaluateGpuGemm () {
 }
 
 //	STUDENT: Add functions here
+//	STUDENT: Add functions here
 
+int runAlexnet (int argc, char ** argv){
+
+	uint32_t batchSize = 8;
+
+	std::cout << "Lazy, you are! ... ";
+	std::cout << "Run Alexnet, you must! ... ";
+
+	// Setup and call necessary functions here to execute corresponding layers of AlexNet with the necessary batchSize
+
+	return 0;
+}
