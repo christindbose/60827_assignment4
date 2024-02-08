@@ -387,7 +387,7 @@ int makeTensor (float ** t, TensorShape & shape) {
 		shape.count = 1;
 	}
 
-	uint64_t tensorSize = shape.height * shape.width * shape.channels;
+	uint64_t tensorSize = shape.height * shape.width * shape.channels * shape.count;
 	*t = (float *) malloc (tensorSize * sizeof(float));
 
 	if (*t == nullptr) {
@@ -480,7 +480,7 @@ int executeCpuConv (TensorShape iShape, TensorShape fShape,
 	std::cout << "OutShape : " << oShape << " \n";
 	out = (float *) malloc (tensorSize(oShape) * sizeof(float));
 
-	convLayer_cpu(in, iShape, filter, fShape, bias, out, oShape, args, 1);
+	convLayer_cpu(in, iShape, filter, fShape, bias, out, oShape, args);
 
 
 	free(in);
@@ -491,12 +491,12 @@ int executeCpuConv (TensorShape iShape, TensorShape fShape,
 
 int convLayer_cpu( float * input, TensorShape iShape, 
 	float * filter, TensorShape fShape, 
-	float * bias, float * output, TensorShape & oShape, 
-	ConvLayerArgs & args, uint32_t batchSize = 1) {
+	float * bias, float * output, TensorShape oShape, 
+	ConvLayerArgs & args) {
 
 	//	Convolution in CPU
-
-	for (uint32_t n = 0; n < batchSize; ++ n) {
+    // oShape.count denotes the batchsize
+	for (uint32_t n = 0; n < oShape.count; ++ n) {
 		for (uint32_t m = 0; m < oShape.channels; ++ m) {
 			for (uint32_t x = 0; x < oShape.height; ++ x ) {
 				for (uint32_t y = 0; y < oShape.width; ++ y) {
@@ -578,7 +578,7 @@ int executeCpuGemm (TensorShape aShape, TensorShape bShape,
 
 	float * c = (float *) malloc(tensorSize(cShape) * sizeof(float));
 
-	gemmLayer_cpu (a, aShape, b, bShape, c, cShape, args, 1);
+	gemmLayer_cpu (a, aShape, b, bShape, c, cShape, args);
 
 	return 0;
 }
@@ -587,7 +587,7 @@ int executeCpuGemm (TensorShape aShape, TensorShape bShape,
 int gemmLayer_cpu (float * a, TensorShape aShape,
 	float * b, TensorShape bShape,
 	float * c, TensorShape & cShape,
-	GemmLayerArgs & args, uint32_t batchSize) {
+	GemmLayerArgs & args) {
 	
 
     int tilesAlongW = (cShape.width + args.tileW - 1) / args.tileW;
@@ -598,7 +598,7 @@ int gemmLayer_cpu (float * a, TensorShape aShape,
 
 
 	while (tileId < tilesAlongW * tilesAlongH) {
-        int offsetH = (tileId / tilesAlongW) * args.tileH;
+        int offsetH = (tileId / tilesAlongH) * args.tileH;
         int offsetW = (tileId % tilesAlongW) * args.tileW;
         int rowIdx, colIdx;
         int row, col, subTile, subTileK, k;

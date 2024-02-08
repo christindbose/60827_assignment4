@@ -153,8 +153,8 @@
 	 */
 	extern int convLayer_cpu( float * input, TensorShape iShape, 
 		float * filter, TensorShape fShape, 
-		float * bias, float * output, TensorShape & oShape, 
-		ConvLayerArgs & args, uint32_t batchSize);
+		float * bias, float * output, TensorShape oShape, 
+		ConvLayerArgs & args);
 
 	typedef struct GemmLayerArgs_t {
 		uint32_t tileH;
@@ -169,7 +169,7 @@
 
 	extern int gemmLayer_cpu (float * a, TensorShape aShape,
 		float * b, TensorShape bShape, float * c, TensorShape & cShape,
-		GemmLayerArgs & args, uint32_t batchSize = 1);
+		GemmLayerArgs & args);
 
 	void printTensor (float * t, TensorShape shape);
 

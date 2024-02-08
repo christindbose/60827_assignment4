@@ -128,8 +128,8 @@ uint64_t evaluateGpuConv (TensorShape iShape, TensorShape fShape,
 
 int convLayer_gpu ( float * input, TensorShape iShape, 
 	float * filter, TensorShape fShape, 
-	float * bias, float * output, TensorShape & oShape, 
-	ConvLayerArgs & args, uint32_t batchSize) {
+	float * bias, float * output, TensorShape oShape, 
+	ConvLayerArgs & args) {
 
 	return 0;
 }
@@ -148,14 +148,3 @@ int evaluateGpuGemm () {
 
 //	STUDENT: Add functions here
 
-int runAlexnet (int argc, char ** argv){
-
-	uint32_t batchSize = 8;
-
-	std::cout << "Lazy, you are! ... ";
-	std::cout << "Run Alexnet, you must! ... ";
-	
-	// Setup and call necessary functions here to execute corresponding layers of AlexNet with the necessary batchSize
-	
-	return 0;
-}

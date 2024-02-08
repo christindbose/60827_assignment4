@@ -191,20 +191,18 @@
 	 */
 	extern int convLayer_gpu ( float * input, TensorShape iShape, 
 		float * filter, TensorShape fShape, 
-		float * bias, float * output, TensorShape & oShape, 
-		ConvLayerArgs & args, uint32_t batchSize);
+		float * bias, float * output, TensorShape oShape, 
+		ConvLayerArgs & args);
 
 	extern int runGpuGemm (int argc, char ** argv);
 
 	extern int gemmLayer_gpu (float * a, TensorShape aShape, 
 		float * b, TensorShape bShape,
-		float * c, TensorShape & cShape,
-		GemmLayerArgs & args, uint32_t batchSize);
+		float * c, TensorShape cShape,
+		GemmLayerArgs & args);
 
 	extern int runGpuGemm (int argc, char ** argv);
 
 	extern int evaluateGpuGemm ();
-
-	extern int runAlexnet (int argc, char ** argv);
 
 #endif
