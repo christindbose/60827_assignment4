@@ -1,4 +1,4 @@
-# Install script for directory: /home/tgrogers-raid/a/chris241/695TA/S24/60827_assignment3/src
+# Install script for directory: /home/tgrogers-raid/a/chris241/695TA/S24/60827_assignment4/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
